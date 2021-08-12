@@ -1,9 +1,13 @@
 import React from 'react';
+import { Small } from '../Input/Input.stories';
 import Button from './Button';
 
 export default {
-    title: 'Button',
-    component: Button
+    title: 'Form/control/Button',
+    component: Button,
+    args: {
+        children: 'Button' //set args at a components level. Args at story levek overrides args at component level.
+    }
 }
 
 export const Primary = () => (
@@ -14,18 +18,38 @@ export const Primary = () => (
 
 export const Secondary = () => (
     <Button variant='secondary'>
-        Primary
+        Secondary
     </Button>
 );
 
 export const Success = () => (
     <Button variant='success'>
-        Primary
+        Success
     </Button>
 );
 
 export const Danger = () => (
     <Button variant='danger'>
-        Primary
+        Danger
     </Button>
 );
+
+const Template = args => <Button {...args}/>;
+
+export const PrimaryA = Template.bind({});
+PrimaryA.args = {
+    variant: 'primary',
+    //children: 'Primary Args'
+};
+
+export const LongPrimaryA  = Template.bind({});
+LongPrimaryA.args = {
+    ...PrimaryA.args, //this reuses PrimaryA args
+    //children: 'Long PrimaryA' //and then overrrides children prop
+};
+
+export const SecondaryA = Template.bind({});
+SecondaryA.args = {
+    variant: 'secondary',
+    //children: 'Secondary Args'
+};
