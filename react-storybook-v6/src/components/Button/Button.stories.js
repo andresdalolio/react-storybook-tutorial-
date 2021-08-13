@@ -72,7 +72,7 @@ TestArgType.args = {
 };
 
 export const Log = () => (
-    <Button variant='primary' onClick={()=>console.log('button clicked')}>
+    <Button variant='primary' onClick={()=>console.log('button clicked', process.env.STORYBOOK_THEME)}>
         Log
     </Button>
 );
