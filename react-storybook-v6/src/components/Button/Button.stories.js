@@ -2,6 +2,7 @@ import React from 'react';
 import { Small } from '../Input/Input.stories';
 import Button from './Button';
 import Center from '../Center/Center';
+import { text, boolean } from '@storybook/addon-knobs';
 
 export default {
     title: 'Form/control/Button',
@@ -9,7 +10,13 @@ export default {
     args: {
         children: 'Button' //set args at a components level. Args at story levek overrides args at component level.
     },
-    decorators: [story => <Center>{story()}</Center>] //this adds decorator locally
+    decorators: [story => <Center>{story()}</Center>], //this adds decorator locally
+    argTypes: {
+        variant: {control: 'text'},
+        children: {control: 'text'},
+        onClick: { action: 'clicked'},
+        onMouseOver: { action: 'mouseOver:'}
+    }
 }
 
 export const Primary = () => (
@@ -57,3 +64,27 @@ SecondaryA.args = {
     variant: 'secondary',
     //children: 'Secondary Args'
 };
+
+export const TestArgType = Template.bind({});
+TestArgType.args = {
+    variant: 'primary',
+    children: 'Secondary Args'
+};
+
+export const Log = () => (
+    <Button variant='primary' onClick={()=>console.log('button clicked')}>
+        Log
+    </Button>
+);
+
+export const Knobs = () => (
+    <button disabled={boolean('Disabled',false)}>
+        {text('Label','Button Label')}
+    </button>
+);
+
+export const Accessible = () => <button>Accessible button</button>;
+
+export const Inaccessible = () => (
+  <button style={{ backgroundColor: 'red', color: 'darkRed' }}>Inaccessible button</button>
+);
